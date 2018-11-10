@@ -13,7 +13,7 @@ def hidden_init(layer):
 class Actor(nn.Module):
     """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc_1=256, fc_2=256, fc_3=256):
+    def __init__(self, state_size, action_size, seed, fc_1=512, fc_2=256, fc_3=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -48,7 +48,7 @@ class Actor(nn.Module):
 class Critic(nn.Module):
     """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc_1=256, fc_2=256, fc_3=256):
+    def __init__(self, state_size, action_size, seed, fc_1=512, fc_2=256, fc_3=256):
         """Initialize parameters and build model.
         Params
         ======

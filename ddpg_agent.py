@@ -5,7 +5,7 @@ from collections import namedtuple, deque
 
 from model import Actor, Critic
 from replay_buffer import SimpleReplayBuffer, ReplayBufferPrioritized
-from ounoise import OUNoise
+from noise import OUNoise
 
 import torch
 import torch.nn.functional as F
@@ -32,6 +32,7 @@ class Agent():
 
         self.max_priority_value = 0
 
+        self.UPDATE_STEPS = 3
         self.MIN_PRIORITY = 0.2
         self.BUFFER_SIZE = BUFFER_SIZE      # replay buffer size
         self.BATCH_SIZE = BATCH_SIZE        # minibatch size
@@ -70,7 +71,7 @@ class Agent():
 
         # Learn, if enough samples are available in memory
         if len(self.memory) > self.BATCH_SIZE:
-            for _ in range(3):
+            for _ in range(self.UPDATE_STEPS):
                 experiences = self.memory.sample()
                 self.learn(experiences, self.GAMMA)
 
