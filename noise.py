@@ -7,10 +7,11 @@ class Noise:
         raise NotImplementedError
 
     def reset(self):
-        pass
+        raise NotImplementedError
 
     def sample(self):
         raise NotImplementedError
+
 
 class OUNoise(Noise):
     """Ornstein-Uhlenbeck process."""
@@ -34,8 +35,8 @@ class OUNoise(Noise):
         self.state = x + dx
         return self.state
 
-class RandomNoise(Noise):
 
+class RandomNoise(Noise):
     def __init__(self, theta=0.2):
         self.theta = theta
 

@@ -6,6 +6,7 @@ import numpy as np
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+
 class ReplayBuffer:
     def __init__(self, action_size, buffer_size, batch_size, seed):
         self.action_size = action_size
@@ -23,6 +24,7 @@ class ReplayBuffer:
     def __len__(self):
         """Return the current size of internal memory."""
         return len(self.memory)
+
 
 class SimpleReplayBuffer(ReplayBuffer):
     def __init__(self, action_size, buffer_size, batch_size, seed):

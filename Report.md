@@ -36,7 +36,7 @@ To challenge exploration vs exploitation problem during the learning, I have use
 I also tried random noise with normal distribution - although it's more computational efficient, it slightly decrease performance.  
 
 ######Replay Buffer
-To break temporary correlation during learning I have decided to implement replay memory (RM) and prioritized RM (pRM). In pRM, prioritization is based on critic loss: the more "surprised" critic is, the greater chance that this memory will be sampled during learning. Although is theory this should increase learning speed, I haven't observed any significant difference and stay with RM.
+To break temporary correlation during learning I have decided to implement replay memory (RM) and prioritized RM (pRM). In pRM, prioritization is based on critic loss: the more "surprised" critic is, the greater chance that this memory will be sampled during learning. Although in theory pRM should increase learning speed, I haven't observed any significant difference and stay with RM.
 
 At each step of the environment `(state, action, reward, next_state, done)` tuples are computed for each of the 20 agents and added to the replay buffer. The code then runs `UPDATE_STEPS` optimization steps with each with a different sample from the replay buffer.
 ######Hyper-parameters
@@ -52,7 +52,7 @@ Here are the hyper parameters used for training.
 * `WEIGHT_DECAY = 0`        (L2 weight decay)
 
 # Plot of Rewards (mean over all 20 agents)
-![](scores.png)
+![](scores_report.png)
 
 # Area for implement 
 * Try different network architecture to reduce network complexity

@@ -8,15 +8,6 @@ from collections import deque
 import torch
 import supporting_functions
 
-ENABLE_PRIORITY =   False
-BUFFER_SIZE     =   int(1e5)
-BATCH_SIZE      =   128
-GAMMA           =   0.99
-TAU             =   1e-3
-LR_ACTOR        =   1e-5
-LR_CRITIC       =   1e-4
-WEIGHT_DECAY    =   0
-
 
 def ddpg(env, agent, brain_name, n_episodes=1000, max_t=300, print_every=1):
     scores_deque = deque(maxlen=100)
