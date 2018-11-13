@@ -9,7 +9,7 @@ import torch
 import supporting_functions
 
 
-def ddpg(env, agent, brain_name, n_episodes=1000, max_t=300, print_every=1):
+def ddpg(env, agent, brain_name, n_episodes=1000, max_t=300, print_every=10):
     scores_deque = deque(maxlen=100)
     scores = []
     for i_episode in range(1, n_episodes+1):
@@ -35,10 +35,10 @@ def ddpg(env, agent, brain_name, n_episodes=1000, max_t=300, print_every=1):
         scores.append(np.mean(score))
         episode_time = time.time() - tick
         print('\rEpisode {}\tScore: {:.2f}\ttime: {:.2f}'.format(i_episode, scores[-1], episode_time))
-        torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
-        torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
         
         if i_episode % print_every == 0:
+            torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
+            torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)))
             if len(scores_deque) == 100 and np.mean(scores_deque) >= 30:
                 print('Done! Yay!')

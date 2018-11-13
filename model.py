@@ -9,10 +9,11 @@ def hidden_init(layer):
     lim = 1. / np.sqrt(fan_in)
     return (-lim, lim)
 
+
 class Actor(nn.Module):
     """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=400, fc2_units=300):
+    def __init__(self, state_size, action_size, seed, fc_1=512, fc_2=256, fc_3=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -24,10 +25,10 @@ class Actor(nn.Module):
         """
         super(Actor, self).__init__()
         self.seed = torch.manual_seed(seed)
-        self.fc1 = nn.Linear(state_size, 512)
-        self.fc2 = nn.Linear(512, 512)
-        self.fc3 = nn.Linear(512, 512)
-        self.fc4 = nn.Linear(512, action_size)
+        self.fc1 = nn.Linear(state_size, fc_1)
+        self.fc2 = nn.Linear(fc_1, fc_2)
+        self.fc3 = nn.Linear(fc_2, fc_3)
+        self.fc4 = nn.Linear(fc_3, action_size)
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -47,7 +48,7 @@ class Actor(nn.Module):
 class Critic(nn.Module):
     """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=400, fc2_units=300):
+    def __init__(self, state_size, action_size, seed, fc_1=512, fc_2=256, fc_3=256):
         """Initialize parameters and build model.
         Params
         ======
@@ -59,10 +60,10 @@ class Critic(nn.Module):
         """
         super(Critic, self).__init__()
         self.seed = torch.manual_seed(seed)
-        self.fcs1 = nn.Linear(state_size, 512)
-        self.fc2 = nn.Linear(512 + action_size, 512)
-        self.fc3 = nn.Linear(512, 512)
-        self.fc4 = nn.Linear(512, 1)
+        self.fcs1 = nn.Linear(state_size, fc_1)
+        self.fc2 = nn.Linear(fc_1 + action_size, fc_2)
+        self.fc3 = nn.Linear(fc_2, fc_3)
+        self.fc4 = nn.Linear(fc_3, 1)
         self.reset_parameters()
 
     def reset_parameters(self):
