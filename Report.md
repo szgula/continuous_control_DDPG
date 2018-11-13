@@ -55,6 +55,8 @@ Here are the hyper parameters used for training.
 ## Plot of Rewards (mean over all 20 agents)
 ![](scores_report.png)
 
+The average score over 100 episodes was achieved after 155 episodes.
+
 ## Area for implement 
 * Try different network architecture to reduce network complexity
 * Play with hyper-parameter to reduce learning time 
