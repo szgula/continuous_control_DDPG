@@ -1,10 +1,18 @@
 # Environment 
 
-Reacher environment is playground provided by Unity for machine learning challenges. In the simulation an agent is a robot arm with 2 joints and 2 links. It can be controlled by 4 continuous space variables which represents torque on both joints. As an control input we get a vector with 33 variables which represents state of the are and position of the target.
+Tennis environment is playground provided by Unity for machine learning challenges. In the simulation there are two agents (tennis rackets) which goal is to strike a ball. The environment is considered to be solved when on average every agent strike at least 10 times in single game (ball do not hit the ground).
+
+##### Reward 
+Environment is partially collaborative and partially competitive - as a result every agent can get positive or negative reward.
+
+Every time the ball pass the net, the agent which last strike the ball gets a reward of +0.05. (big positive reward).
+
+When the ball hits the ground the agent on which side it happened gets -0.005 reward (small negative reward).
+
 
 ## Learning Algorithm
 
-To solve Reacher environment I decided to use ddpg algorithm from UDACITY repository and adopt it to this specific challenge. 
+To solve Tennis environment I decided to use multi-agent DDPG (MADDPG) algorithm. To reduce code repetition I have implemented the MADDPG on top of the DDPG algorithm, which I implemented to solve Reacher environment.
 
 The neural network models behind my solution are:
 
@@ -33,13 +41,12 @@ Actor consist of:
 The layers are connected by Relu activation function, and output layer has hyperbolic tangent.
     
 #### Noise
-To challenge exploration vs exploitation problem during the learning, I have used Ornstein-Uhlenbeck process with max noise decreasing over the time (starts with sigma == 1 and ends with sigma == 0.2). This solution has helped algorithm with early learning.
-I also tried random noise with normal distribution - although it's more computational efficient, it slightly decrease performance.  
+To challenge exploration vs exploitation problem during learning, I have used random noise with decreasing amplitude over the time. I also tried to use Ornstein-Uhlenbeck noise - but unfortunately it has resulted in unstable learning.
 
 #### Replay Buffer
-To break temporary correlation during learning I have decided to implement replay memory (RM) and prioritized RM (pRM). In pRM, prioritization is based on critic loss: the more "surprised" critic is, the greater chance that this memory will be sampled during learning. Although in theory pRM should increase learning speed, I haven't observed any significant difference and stay with RM.
+To break temporary correlation during learning I have decided to use replay memory (RM).
 
-At each step of the environment `(state, action, reward, next_state, done)` tuples are computed for each of the 20 agents and added to the replay buffer. The code then runs `UPDATE_STEPS` optimization steps with each with a different sample from the replay buffer.
+At each step of the environment `(states, actions, rewards, next_states, dones)` tuples are added to the replay buffer. Then the algorithm runs few (`UPDATE_STEPS`) optimization steps for each agent independently.
 #### Hyper-parameters
 Here are the hyper parameters used for training.
 
@@ -52,15 +59,28 @@ Here are the hyper parameters used for training.
 * `LR_CRITIC = 1e-4`        (learning rate of the critic)
 * `WEIGHT_DECAY = 0`        (L2 weight decay)
 
-## Plot of Rewards (mean over all 20 agents)
-![](scores_report_project_2.png)
+## Plot of Rewards (mean over all agents)
+![](MADDPG_tenis.png)
 
-The average score over 100 episodes was achieved after 155 episodes.
+The primary goal of average score +0.5 over all agents (over 100 episodes) has been achieved after 2850 episodes.
+
+The double goal score (+1.0) has been achieved after 3508 episodes.
+
+### Comparison to DDPG
+I have tried to solve this environment as only collaborative challenge. Although in most cases it is impossible, in this scenario we care more about duration of the game rather then win of specific agent. 
+
+I used a shared networks for both actors and critics. Moreover I have fully reuse the network structures and hyperparameters from previous environment.
+The result was surprisingly good:
+
+ ![](score_2.60_after_540.png)
+ 
+ it has reduced the learning time about 5 times comparing to MADDPG.
+ 
 
 ## Area for implement 
 * Try different network architecture to reduce network complexity
 * Play with hyper-parameter to reduce learning time 
-* Play with priorities memory replay: tune buffer size, find other prioritisation metrics.
-* Try other types of actor-critic RL algorithms such as A3C.
+* Implement support for priorities memory replay.
+* Try other types of multi-agent actor-critic RL algorithms.
 
  
