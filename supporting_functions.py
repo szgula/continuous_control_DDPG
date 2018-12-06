@@ -31,7 +31,7 @@ def plot_average_score(scores, title):
 
 
 def save_algorithm_parameters(agent, title, time_to_learn):
-    with open('{}.txt'.formt(title), "w") as f:
+    with open('{}.txt'.format(title), "w") as f:
         text = 'Learning rate actor: {}'.format(agent.LR_ACTOR)
         f.write(text)
 

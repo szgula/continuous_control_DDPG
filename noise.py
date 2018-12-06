@@ -18,6 +18,7 @@ class OUNoise(Noise):
 
     def __init__(self, size, seed, mu=0., theta=0.7, sigma=0.1):
         """Initialize parameters and noise process."""
+        self.size = size
         self.mu = mu * np.ones(size)
         self.theta = theta
         self.sigma = sigma
@@ -37,10 +38,14 @@ class OUNoise(Noise):
 
 
 class RandomNoise(Noise):
-    def __init__(self, theta=0.2):
-        self.theta = theta
+    def __init__(self, size, sigma=0.2):
+        self.sigma = sigma
+        self.size = size
+
+    def reset(self):
+        pass
 
     def sample(self):
-        noise = (np.random.rand(4) - 0.5) * 2
-        noise *= self.theta
+        noise = (np.random.rand(self.size) - 0.5) * 2
+        noise *= self.sigma
         return noise
