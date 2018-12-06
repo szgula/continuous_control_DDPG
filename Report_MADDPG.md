@@ -2,7 +2,7 @@
 
 Tennis environment is playground provided by Unity for machine learning challenges. In the simulation there are two agents (tennis rackets) which goal is to strike a ball. The environment is considered to be solved when on average every agent strike at least 10 times in single game (ball do not hit the ground).
 
-##### Reward 
+#### Reward 
 Environment is partially collaborative and partially competitive - as a result every agent can get positive or negative reward.
 
 Every time the ball pass the net, the agent which last strike the ball gets a reward of +0.05. (big positive reward).
