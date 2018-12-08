@@ -28,11 +28,11 @@ The observation space consists of 33 variables corresponding to position, rotati
         - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip)
         - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip)
 
-### Instructions
+### Further Instructions
 
 - Further project description: algorithm description, result presentation can be find in [Report_DDPG](Report_DDPG.md).
-- Environment handing can be find in [Continuous_Control.py](Continuous_Control.py) in ddpg function.
-- Agent learning algorithm can be find in [ddpg_agent.py.py](ddpg_agent.py.py) in myDDPG class.
+- Environment handing can be find in [Continuous_Control.py](Continuous_Control.py) in `ddpg` function.
+- Agent learning algorithm can be find in [ddpg_agent.py.py](ddpg_agent.py.py) in `myDDPG` class.
 
 # Project: Tennis (Collaboration and Competition)
 
@@ -73,10 +73,10 @@ __This repo is built in Ubuntu, please change the environment file if your OS is
 
 To install required packages, run `pip install -r src/requirements.txt` in terminal.
 
-## Project Details
+## Further Instructions
 
-- Further project description: algorithm description, result presentation can be find in [Report_MADDPG.md](Report_MADDPG.md.md).
-- Environment handing can be find in [Continuous_Control.py](Continuous_Control.py) in maddpg function.
-- Agent learning algorithm can be find in [ddpg_agent.py.py](ddpg_agent.py.py) in myMADDPG class.
+- Further project description: algorithm description, result presentation can be find in [Report_MADDPG.md](Report_MADDPG.md).
+- Environment handing can be find in [Continuous_Control.py](Continuous_Control.py) in `maddpg` function.
+- Agent learning algorithm can be find in [ddpg_agent.py](ddpg_agent.py) in `myMADDPG` class.
 
 
