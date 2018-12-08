@@ -32,7 +32,7 @@ The observation space consists of 33 variables corresponding to position, rotati
 
 - Further project description: algorithm description, result presentation can be find in [Report_DDPG](Report_DDPG.md).
 - Environment handing can be find in [Continuous_Control.py](Continuous_Control.py) in `ddpg` function.
-- Agent learning algorithm can be find in [ddpg_agent.py.py](ddpg_agent.py.py) in `myDDPG` class.
+- Agent learning algorithm can be find in [ddpg_agent.py](ddpg_agent.py) in `myDDPG` class.
 
 # Project: Tennis (Collaboration and Competition)
 
